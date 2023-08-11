@@ -42,11 +42,6 @@ int _printf(const char *format, ...)
 				j = j + 1;
 			}
 		}
-		else
-		{
-			exit(98);
-			return (-1);
-		}
 		j = 0;
 		i = i + 1;
 	}
