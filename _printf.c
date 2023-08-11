@@ -74,7 +74,7 @@ void print_substring(const char *format, int startpos, int endpos)
 /**
  * error_out - this is run when something goes wrong
  *
- * Returns: -1
+ * Return: -1
  */
 int error_out(void)
 {
