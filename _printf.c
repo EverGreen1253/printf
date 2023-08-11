@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 	va_start(list, format);
 	while (format[i] != '\0')
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (format[i] == '%')
 		{
 			endpos = i - 1;
 			while (j < 5)
