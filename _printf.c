@@ -24,10 +24,7 @@ int _printf(const char *format, ...)
 	int endpos = 0;
 
 	if (!format)
-	{
-		exit (98);
-		return (-1);
-	}
+		return (error_out());
 
 	va_start(list, format);
 	while (format[i] != '\0')
@@ -35,10 +32,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			if (!format[i + 1])
-			{
-				exit (98);
-				return (-1);
-			}
+				return (error_out());
 
 			endpos = i - 1;
 			while (j < 5)
@@ -58,7 +52,6 @@ int _printf(const char *format, ...)
 		i = i + 1;
 	}
 	va_end(list);
-
 	endpos = i - 1;
 	len = len + (endpos - startpos) + 1;
 	print_substring(format, startpos, endpos);
@@ -80,4 +73,10 @@ void print_substring(const char *format, int startpos, int endpos)
 		write(1, format + i, 1);
 		i = i + 1;
 	}
+}
+
+int error_out()
+{
+	exit(98);
+	return (-1);
 }

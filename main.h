@@ -25,5 +25,6 @@ int sub_dint(va_list *);
 
 void print_substring(const char *, int, int);
 int print_int(int n);
+int error_out();
 
 #endif
