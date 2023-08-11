@@ -46,12 +46,6 @@ int sub_string(va_list *list)
  */
 int sub_percent(va_list *list)
 {
-	/**
-	 * OK. I played cheat by printing out the percentage directly.
-	 * But we still need to call va_arg to move on to the next arg in the list.
-	 */
-	char c = va_arg(*list, int);
-
 	write(1, "%", 1);
 
 	return (1);
