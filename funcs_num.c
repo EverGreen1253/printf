@@ -40,7 +40,7 @@ int sub_int(va_list *list)
  */
 int print_int(int n)
 {
-	int len = 0;
+	int len = 1;
 	int r = n % 10;
 	char c = r + 48;
 
@@ -51,7 +51,7 @@ int print_int(int n)
 
 	write(1, &c, 1);
 
-	return (1);
+	return (len);
 
 }
 
