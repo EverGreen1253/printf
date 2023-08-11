@@ -12,20 +12,15 @@
 int _printf(const char *format, ...)
 {
 	op_t ops[] = {
-		{"c", sub_char},
-		{"s", sub_string},
-		{"%", sub_percent},
-		{"d", sub_int},
-		{"i", sub_dint}
+		{"c", sub_char}, {"s", sub_string}, {"%", sub_percent},
+		{"d", sub_int}, {"i", sub_dint}
 	};
 	va_list list;
 	int i = 0;
 	int j = 0;
 	int len = 0;
-	int temp = 0;
-	char *output;
 	int startpos = 0;
-	int endpos;
+	int endpos = 0;
 
 	va_start(list, format);
 	while (format[i] != '\0')
@@ -37,29 +32,15 @@ int _printf(const char *format, ...)
 			{
 				if (*ops[j].t == format[i + 1])
 				{
-					len = len + (endpos - startpos) + 1;
-					
-					// printf("\nStartpos - %d, Endpos - %d, len - %d\n", startpos, endpos, ((endpos - startpos) + 1));
-
 					print_substring(format, startpos, endpos);
-
+					len = len + ((endpos - startpos) + 1) + ops[j].f(&list);
 					startpos = i + 2;
-
-					len = len + ops[j].f(&list);
-
-					/**
-					 * + 1 if conversion specifier found and end the ops comparison loop
-					 * the next increment to i in the main loop will place i nicely on the
-					 * next character after the specifier
-					 */
-
 					i = startpos - 1;
 					j = 5;
 				}
 				j = j + 1;
 			}
 		}
-
 		j = 0;
 		i = i + 1;
 	}
@@ -67,16 +48,16 @@ int _printf(const char *format, ...)
 
 	endpos = i - 1;
 	len = len + (endpos - startpos) + 1;
-
-	// printf("\nStartpos - %d, Endpos - %d, len - %d\n", startpos, endpos, ((endpos - startpos) + 1));
-
 	print_substring(format, startpos, endpos);
-
-	// printf("Final Length - %d\n", len);
-
 	return (len);
 }
 
+/**
+ * print_substring - prints chars between positions passed in
+ * @format: the string pointer
+ * @startpos: start position int
+ * @endpos: end position int
+ */
 void print_substring(const char *format, int startpos, int endpos)
 {
 	int i = startpos;
