@@ -49,7 +49,7 @@ int sub_percent(va_list *list)
 	if (list != NULL)
 	{
 		write(1, "%", 1);
-	
+
 		return (1);
 	}
 	return (0);
