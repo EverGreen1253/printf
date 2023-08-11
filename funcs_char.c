@@ -46,8 +46,12 @@ int sub_string(va_list *list)
  */
 int sub_percent(va_list *list)
 {
-	write(1, "%", 1);
-
-	return (1);
+	if (list != NULL)
+	{
+		write(1, "%", 1);
+	
+		return (1);
+	}
+	return (0);
 }
 
