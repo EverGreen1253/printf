@@ -21,7 +21,6 @@ int _printf(const char *format, ...)
 	int j = 0;
 	int len = 0;
 	int startpos = 0;
-	int endpos = 0;
 
 	if (!format)
 		return (error_out());
@@ -34,13 +33,12 @@ int _printf(const char *format, ...)
 			if (!format[i + 1])
 				return (error_out());
 
-			endpos = i - 1;
 			while (j < 5)
 			{
 				if (*ops[j].t == format[i + 1])
 				{
-					print_substring(format, startpos, endpos);
-					len = len + ((endpos - startpos) + 1) + ops[j].f(&list);
+					print_substring(format, startpos, (i - 1));
+					len = len + (((i - 1) - startpos) + 1) + ops[j].f(&list);
 					startpos = i + 2;
 					i = startpos - 1;
 					j = 5;
@@ -52,10 +50,8 @@ int _printf(const char *format, ...)
 		i = i + 1;
 	}
 	va_end(list);
-	endpos = i - 1;
-	len = len + (endpos - startpos) + 1;
 	print_substring(format, startpos, endpos);
-	return (len);
+	return (len + ((i - 1) - startpos) + 1);
 }
 
 /**
@@ -75,7 +71,12 @@ void print_substring(const char *format, int startpos, int endpos)
 	}
 }
 
-int error_out()
+/**
+ * error_out - this is run when something goes wrong
+ *
+ * Returns: -1
+ */
+int error_out(void)
 {
 	exit(98);
 	return (-1);
