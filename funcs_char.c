@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -28,14 +29,28 @@ int sub_string(va_list *list)
 {
 	char *s = va_arg(*list, char *);
 	int i = 0;
+	char *null = "(null)";
 
-	while (s[i] != '\0')
+	if (s)
 	{
-		i = i + 1;
-	}
-	write(1, s, i);
+		while (s[i] != '\0')
+		{
+			i = i + 1;
+		}
+		write(1, s, i);
 
-	return (i);
+		return (i);
+	}
+	else
+	{
+		while (null[i] != '\0')
+		{
+			i = i + 1;
+		}
+		write(1, null, i);
+
+		return (i);
+	}
 }
 
 /**
