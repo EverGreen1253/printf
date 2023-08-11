@@ -50,7 +50,7 @@ int _printf(const char *format, ...)
 		i = i + 1;
 	}
 	va_end(list);
-	print_substring(format, startpos, endpos);
+	print_substring(format, startpos, (i - 1));
 	return (len + ((i - 1) - startpos) + 1);
 }
 
