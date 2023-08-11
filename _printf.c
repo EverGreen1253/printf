@@ -23,11 +23,23 @@ int _printf(const char *format, ...)
 	int startpos = 0;
 	int endpos = 0;
 
+	if (!format)
+	{
+		exit (98);
+		return (-1);
+	}
+
 	va_start(list, format);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
+			if (!format[i + 1])
+			{
+				exit (98);
+				return (-1);
+			}
+
 			endpos = i - 1;
 			while (j < 5)
 			{
