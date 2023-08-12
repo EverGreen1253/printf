@@ -11,8 +11,8 @@ int main(void)
 {
 	int len, len2;
 
-	len = _printf("%d", 1024);
-	len2 = printf("%d", 1024);
+	len = _printf("%d\n", INT_MIN);
+	len2 = printf("%d\n", INT_MIN);
 
 	printf("\nlen - %d\n", len);
 	printf("\nlen2 - %d\n", len2);

@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include "main.h"
 
@@ -12,33 +13,35 @@
 int sub_int(va_list *list)
 {
 	int n = va_arg(*list, int);
-	int len;
+	long unsigned l;
+	int len = 0;
 	int negative = 0;
 
 	if (n < 0)
 	{
-		n = -1 * n;
 		write(1, "-", 1);
-		negative = 1;
+		len = print_int_neg(n) + 1;
 	}
-
-	len = print_int(n);
-
-	if (negative == 1)
+	else if (n == 0)
 	{
-		len = len + 1;
+		write(1, "0", 1);
+		len = 1;
+	}
+	else
+	{
+		len = print_int_pos(n);
 	}
 
 	return (len);
 }
 
 /**
- * print_int - recursive func to print ints char by char
+ * print_int_pos - recursive func to print a pos int char by char
  * @n: num to print
  *
  * Return: length of digit printed
  */
-int print_int(int n)
+int print_int_pos(int n)
 {
 	int len = 1;
 	int r = n % 10;
@@ -46,14 +49,37 @@ int print_int(int n)
 
 	if (n > 9)
 	{
-		len = len + print_int((n - r) / 10);
+		len = len + print_int_pos((n - r) / 10);
 	}
 
 	write(1, &c, 1);
 
 	return (len);
-
 }
+
+/**
+ * print_int_neg - recursive func to print a neg int char by char
+ * @n: num to print
+ *
+ * Return: length of digit printed
+ */
+int print_int_neg(int n)
+{
+	int len = 1;
+	int r =  -(n % 10);
+	char c = r + 48;
+
+	if (n < -9)
+	{
+		len = len + print_int_neg((n + r) / 10);
+	}
+
+	write(1, &c, 1);
+
+	return (len);
+}
+
+
 
 /**
  * sub_dint - prints int values of different bases
