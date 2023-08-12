@@ -13,9 +13,7 @@
 int sub_int(va_list *list)
 {
 	int n = va_arg(*list, int);
-	long unsigned l;
 	int len = 0;
-	int negative = 0;
 
 	if (n < 0)
 	{
