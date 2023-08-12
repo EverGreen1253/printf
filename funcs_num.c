@@ -92,8 +92,10 @@ int sub_dint(va_list *list)
 	 * That means they start with 0b, 0x
 	 */
 
-	sub_int(list);
+	int len;
 
-	return (1);
+	len = sub_int(list);
+
+	return (len);
 }
 
